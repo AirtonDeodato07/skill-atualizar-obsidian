@@ -1,0 +1,11 @@
+{
+  "vault": "Obsidian/Meu Projeto",
+  "codigo": "^(src/|scripts/|drizzle/|vercel\\.json$|next\\.config\\.ts$)",
+  "historicoDesde": "2026-01-01",
+  "arquivosSnapshot": 300,
+  "pastaIA": "IA do projeto",
+  "skillsProprias": ["atualizar-obsidian"],
+  "espelharNoCodex": ["atualizar-obsidian"],
+  "gerarAgentsMd": true,
+  "arquivoEnv": ".env.local"
+}
