@@ -1,9 +1,46 @@
 # Skill `atualizar-obsidian` — modelo de projeto
 
+**Português** · [English](README.en.md) · [Español](README.es.md)
+
 Modelo pronto para fazer o **Claude Code** (e o **Codex**) usar um vault do **Obsidian** como a
 memória do seu projeto: a IA **consulta** as notas antes de mexer no código, **registra** cada
 conversa numa memória viva e **atualiza** as notas ao terminar — com uma auditoria que aponta
 nota atrasada, link quebrado e código sem documentação.
+
+## Como funciona
+
+![Ciclo em quatro etapas: a IA consulta o vault, registra a conversa, audita as notas contra o git e atualiza o que mudou; a próxima sessão começa com o vault em dia.](docs/images/fluxo-pt.png)
+
+## Exemplos
+
+As imagens vêm da "Loja Exemplo", um projeto fictício criado a partir deste modelo. As telas são do
+Obsidian, e a auditoria é a saída real do script.
+
+### Memória de chat
+
+Cada conversa ganha uma nota com o estado atual, a linha do tempo, as decisões e as pendências.
+
+![Nota "Memória de chat 05-11" aberta no Obsidian, com as seções Estado agora, Linha do tempo, Decisões do usuário e Pendências.](docs/images/memoria-de-chat.png)
+
+### Nota de módulo
+
+Cada área do código tem uma nota com as regras e as armadilhas. O campo `cobre:` diz quais caminhos
+ela documenta.
+
+![Nota "Frete" aberta no Obsidian, com o campo cobre apontando para src/lib/frete e blocos destacados para a regra única e para uma armadilha.](docs/images/nota-de-modulo.png)
+
+### Auditoria
+
+Neste exemplo, ela encontrou uma nota atrasada, um código sem nota, um link quebrado e uma nota órfã.
+
+![Saída do script auditar-vault.mjs no terminal, listando os problemas encontrados por categoria.](docs/images/auditoria.png)
+
+### Grafo do vault
+
+As notas ficam ligadas no grafo do Obsidian, aqui sem a pasta `IA do projeto`. O nó apagado,
+"Tabela de frete", é o link quebrado que a auditoria apontou.
+
+![Grafo do Obsidian com a nota Home no centro, ligada às notas de módulos, decisões e sessões.](docs/images/grafo.png)
 
 ## O que vem no modelo
 
@@ -24,6 +61,8 @@ nota atrasada, link quebrado e código sem documentação.
     ├── Sessões/Modelo - Memória de chat.md
     └── Operação/Manter o vault em dia.md, Ambiente e segredos.md
 ```
+
+Este README, as traduções e `docs/images/` só explicam o modelo: pode apagar tudo isso no seu projeto.
 
 ## Como usar no seu projeto
 
@@ -67,7 +106,7 @@ node .claude/skills/atualizar-obsidian/scripts/auditar-vault.mjs --json      # s
 Ela cruza o `cobre:` + `atualizado:` do frontmatter de cada nota com o histórico do git e lista:
 notas atrasadas, código sem nota, caminhos que sumiram, links `[[...]]` e `[[...#seção]]`
 quebrados, notas órfãs, cópias fora de sincronia, caracteres de controle e a contagem de notas
-contra o número declarado no `CLAUDE.md`.
+contra o número declarado no `CLAUDE.md`. Veja uma saída real em [Exemplos](#exemplos).
 
 ## Segurança
 
